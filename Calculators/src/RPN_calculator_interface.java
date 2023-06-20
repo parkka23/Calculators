@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Stack;
 
 
@@ -73,6 +74,7 @@ public class RPN_calculator_interface implements ActionListener {
             functionButtons[i].addActionListener(this);
             functionButtons[i].setFont(myFont);
             functionButtons[i].setFocusable(false);
+            functionButtons[i].setBackground(Color.ORANGE);
         }
 
         for (int i=0;i<10;i++) {
@@ -80,6 +82,7 @@ public class RPN_calculator_interface implements ActionListener {
             numberButtons[i].addActionListener(this);
             numberButtons[i].setFont(myFont);
             numberButtons[i].setFocusable(false);
+            numberButtons[i].setBackground(Color.LIGHT_GRAY);
         }
 
         negButton.setBounds(50,430,100,50);
@@ -89,6 +92,7 @@ public class RPN_calculator_interface implements ActionListener {
         panel=new JPanel();
         panel.setBounds(50,100,300,300);
         panel.setLayout(new GridLayout(4,4,10,10));
+
 
         panel.add(numberButtons[1]);
         panel.add(numberButtons[2]);
@@ -106,6 +110,7 @@ public class RPN_calculator_interface implements ActionListener {
         panel.add(numberButtons[0]);
         panel.add(equButton);
         panel.add(divButton);
+        panel.setBackground(Color.GRAY);
 
         frame.add(panel);
         frame.add(delButton);
@@ -114,6 +119,7 @@ public class RPN_calculator_interface implements ActionListener {
         frame.add(textField);
         frame.add(textField2);
         frame.setVisible(true);
+        frame.getContentPane().setBackground(Color.GRAY);
     }
 
     public static void main(String[] args) {
@@ -122,7 +128,7 @@ public class RPN_calculator_interface implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        functionButtons[5].setEnabled(true);
         for (int i = 0; i < 10; i++) {
             if (e.getSource() == numberButtons[i]) {
                 textField.setText(textField.getText().concat(String.valueOf(i)));
@@ -135,6 +141,16 @@ public class RPN_calculator_interface implements ActionListener {
         }
 
         if (e.getSource() == addButton) {
+//            value= BigDecimal.valueOf(0);
+//            ArrayList<BigDecimal> nums=new ArrayList<>();
+//
+//            int i=0;
+//            do{
+//                nums.set(i, BigDecimal.valueOf(Double.parseDouble(stack.pop())));
+//                value.add(nums.get(i));
+//                i++;
+//            }while (!stack.isEmpty());
+//
             x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
             y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
             value = x.add(y);
@@ -179,9 +195,14 @@ public class RPN_calculator_interface implements ActionListener {
         }
 
         if (e.getSource() == equButton) {
-            stack.push(textField.getText());
-            textField2.setText(String.join(" ", stack));
-            textField.setText("");
+            if (stack.size()<2) {
+                stack.push(textField.getText());
+                textField2.setText(String.join(" ", stack));
+                textField.setText("");
+            }
+            else {
+                functionButtons[5].setEnabled(false);
+            }
 
 
         }
