@@ -3,8 +3,7 @@ import java.util.*;
 import java.io.IOException;
 
 public class RPN_calculator {
-    public Double calculate(String[] tokens)
-    {
+    public Double calculate(String[] tokens) {
         Stack<String> stack = new Stack<String>();
         BigDecimal x, y;
         String result = "";
@@ -23,8 +22,7 @@ public class RPN_calculator {
                     && !tokens[i].equals("*") && !tokens[i].equals("/")) {
                 stack.push(tokens[i]);
                 continue;
-            }
-            else {
+            } else {
                 // else if the character is the special
                 // character then use the switch method to
                 // perform the action
@@ -79,7 +77,7 @@ public class RPN_calculator {
 
                         x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
                         y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
-                        value =y.divide(x);
+                        value = y.divide(x);
                         result = p + value;
                         stack.push(result);
                         break;
@@ -96,10 +94,9 @@ public class RPN_calculator {
 }
 
 class Test {
-    public static void main(String[] args) throws IOException
-    {
-        Scanner sc=new Scanner(System.in);
-        String input=" ";
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        String input = " ";
 
         do {
             // String Input

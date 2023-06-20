@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Stack;
 
 
@@ -11,86 +10,79 @@ public class RPN_calculator_interface implements ActionListener {
     JFrame frame;
     JTextField textField, textField2;
 
-    JButton[] numberButtons=new JButton[10];
-    JButton[] functionButtons=new JButton[9];
+    JButton[] numberButtons = new JButton[10];
+    JButton[] functionButtons = new JButton[9];
     JButton addButton, subButton, mulButton, divButton;
     JButton decButton, equButton, delButton, clrButton, negButton;
     JPanel panel;
 
-    Font myFont=new Font("Poppings", Font.BOLD, 21);
-
-    double num1=0, num2=0;
-    char operator;
-
+    Font myFont = new Font("Poppings", Font.BOLD, 21);
     Stack<String> stack = new Stack<String>();
 
     BigDecimal x;
     BigDecimal y;
     String result = "";
-    String choice;
     BigDecimal value;
     String p = "";
 
-    RPN_calculator_interface(){
-        frame=new JFrame("Calculator");
+    RPN_calculator_interface() {
+        frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 550);
         frame.setLayout(null);
 
-        textField=new JTextField();
-        textField.setBounds(50,60,300,30);
+        textField = new JTextField();
+        textField.setBounds(50, 60, 300, 30);
         textField.setFont(myFont);
         textField.setEditable(false);
 
-        textField2=new JTextField();
-        textField2.setBounds(50,25,300,30);
+        textField2 = new JTextField();
+        textField2.setBounds(50, 25, 300, 30);
         textField2.setFont(myFont);
         textField2.setEditable(false);
 
+        addButton = new JButton("+");
+        subButton = new JButton("-");
+        mulButton = new JButton("*");
+        divButton = new JButton("/");
+        decButton = new JButton(".");
+        equButton = new JButton("↵");
+        delButton = new JButton("Delete");
+        clrButton = new JButton("Clear");
+        negButton = new JButton("(-)");
 
-        addButton=new JButton("+");
-        subButton=new JButton("-");
-        mulButton=new JButton("*");
-        divButton=new JButton("/");
-        decButton=new JButton(".");
-        equButton=new JButton("↵");
-        delButton=new JButton("Delete");
-        clrButton=new JButton("Clear");
-        negButton=new JButton("(-)");
+        functionButtons[0] = addButton;
+        functionButtons[1] = subButton;
+        functionButtons[2] = mulButton;
+        functionButtons[3] = divButton;
+        functionButtons[4] = decButton;
+        functionButtons[5] = equButton;
+        functionButtons[6] = delButton;
+        functionButtons[7] = clrButton;
+        functionButtons[8] = negButton;
 
-        functionButtons[0]=addButton;
-        functionButtons[1]=subButton;
-        functionButtons[2]=mulButton;
-        functionButtons[3]=divButton;
-        functionButtons[4]=decButton;
-        functionButtons[5]=equButton;
-        functionButtons[6]=delButton;
-        functionButtons[7]=clrButton;
-        functionButtons[8]=negButton;
-
-        for (int i=0;i<9;i++) {
+        for (int i = 0; i < 9; i++) {
             functionButtons[i].addActionListener(this);
             functionButtons[i].setFont(myFont);
             functionButtons[i].setFocusable(false);
             functionButtons[i].setBackground(Color.ORANGE);
         }
 
-        for (int i=0;i<10;i++) {
-            numberButtons[i]=new JButton(String.valueOf(i));
+        for (int i = 0; i < 10; i++) {
+            numberButtons[i] = new JButton(String.valueOf(i));
             numberButtons[i].addActionListener(this);
             numberButtons[i].setFont(myFont);
             numberButtons[i].setFocusable(false);
             numberButtons[i].setBackground(Color.LIGHT_GRAY);
         }
 
-        negButton.setBounds(50,430,100,50);
-        delButton.setBounds(150,430,100,50);
-        clrButton.setBounds(250,430,100,50);
+        negButton.setBounds(50, 430, 100, 50);
+        delButton.setBounds(150, 430, 100, 50);
+        clrButton.setBounds(250, 430, 100, 50);
 
-        panel=new JPanel();
-        panel.setBounds(50,100,300,300);
-        panel.setLayout(new GridLayout(4,4,10,10));
-
+        panel = new JPanel();
+        panel.setBounds(50, 100, 300, 300);
+        panel.setLayout(new GridLayout(4, 4, 10, 10));
 
         panel.add(numberButtons[1]);
         panel.add(numberButtons[2]);
@@ -121,7 +113,7 @@ public class RPN_calculator_interface implements ActionListener {
     }
 
     public static void main(String[] args) {
-        RPN_calculator_interface calc=new RPN_calculator_interface();
+        RPN_calculator_interface calc = new RPN_calculator_interface();
     }
 
     @Override
@@ -174,7 +166,7 @@ public class RPN_calculator_interface implements ActionListener {
         if (e.getSource() == divButton) {
             x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
             y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
-            value =y.divide(x);
+            value = y.divide(x);
             result = p + value;
             stack.push(result);
 
@@ -183,12 +175,11 @@ public class RPN_calculator_interface implements ActionListener {
         }
 
         if (e.getSource() == equButton) {
-            if (stack.size()<2) {
+            if (stack.size() < 2) {
                 stack.push(textField.getText());
                 textField2.setText(String.join(" ", stack));
                 textField.setText("");
-            }
-            else {
+            } else {
                 functionButtons[5].setEnabled(false);
             }
         }
