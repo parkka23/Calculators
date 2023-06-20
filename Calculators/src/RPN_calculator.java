@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.*;
 import java.io.IOException;
 
@@ -5,10 +6,10 @@ public class RPN_calculator {
     public Double calculate(String[] tokens)
     {
         Stack<String> stack = new Stack<String>();
-        Double x, y;
+        BigDecimal x, y;
         String result = "";
         String choice;
-        Double value = (double) 0;
+        BigDecimal value;
         String p = "";
 
         // Iterating to each character
@@ -38,9 +39,9 @@ public class RPN_calculator {
                         // put the first two character
                         // and then again store back to the stack
 
-                        x = Double.parseDouble(stack.pop());
-                        y = Double.parseDouble(stack.pop());
-                        value = x + y;
+                        x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        value = x.add(y);
                         result = p + value;
                         stack.push(result);
                         break;
@@ -50,9 +51,9 @@ public class RPN_calculator {
                         // Performing the "-" operation by popping
                         // put the first two character
                         // and then again store back to the stack
-                        x = Double.parseDouble(stack.pop());
-                        y = Double.parseDouble(stack.pop());
-                        value = y - x;
+                        x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        value = y.subtract(x);
                         result = p + value;
                         stack.push(result);
                         break;
@@ -63,9 +64,9 @@ public class RPN_calculator {
                         // by popping put the first two character
                         // and then again store back to the stack
 
-                        x = Double.parseDouble(stack.pop());
-                        y = Double.parseDouble(stack.pop());
-                        value = x * y;
+                        x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        value = x.multiply(y);
                         result = p + value;
                         stack.push(result);
                         break;
@@ -76,9 +77,9 @@ public class RPN_calculator {
                         // put the first two character
                         // and then again store back to the stack
 
-                        x = Double.parseDouble(stack.pop());
-                        y = Double.parseDouble(stack.pop());
-                        value = y / x;
+                        x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
+                        value =y.divide(x);
                         result = p + value;
                         stack.push(result);
                         break;

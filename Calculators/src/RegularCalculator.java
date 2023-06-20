@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-
+import java.math.BigDecimal;
 
 
 public class RegularCalculator  implements ActionListener {
@@ -16,7 +16,7 @@ public class RegularCalculator  implements ActionListener {
 
     Font myFont=new Font("Poppings", Font.BOLD, 21);
 
-    double num1=0, num2=0, result=0;
+    BigDecimal num1, num2, result;
     char operator;
 
 
@@ -115,40 +115,40 @@ public class RegularCalculator  implements ActionListener {
         }
 
         if(e.getSource()==addButton) {
-            num1=Double.parseDouble(textField.getText());
+            num1=BigDecimal.valueOf(Double.parseDouble(textField.getText()));
             operator='+';
             textField.setText("");
         }
         if(e.getSource()==subButton) {
-            num1=Double.parseDouble(textField.getText());
+            num1=BigDecimal.valueOf(Double.parseDouble(textField.getText()));
             operator='-';
             textField.setText("");
         }
         if(e.getSource()==mulButton) {
-            num1=Double.parseDouble(textField.getText());
+            num1=BigDecimal.valueOf(Double.parseDouble(textField.getText()));
             operator='*';
             textField.setText("");
         }
         if(e.getSource()==divButton) {
-            num1=Double.parseDouble(textField.getText());
+            num1=BigDecimal.valueOf(Double.parseDouble(textField.getText()));
             operator='/';
             textField.setText("");
         }
         if(e.getSource()==equButton) {
-            num2=Double.parseDouble(textField.getText());
+            num2=BigDecimal.valueOf(Double.parseDouble(textField.getText()));
 
             switch(operator) {
                 case'+':
-                    result=num1+num2;
+                    result=num1.add(num2);
                     break;
                 case'-':
-                    result=num1-num2;
+                    result=num1.subtract(num2);
                     break;
                 case'*':
-                    result=num1*num2;
+                    result=num1.multiply(num2);
                     break;
                 case'/':
-                    result=num1/num2;
+                    result=num1.divide(num2);
                     break;
             }
             textField.setText(String.valueOf(result));
