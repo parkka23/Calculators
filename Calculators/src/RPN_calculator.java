@@ -107,14 +107,6 @@ class Test {
             input = sc.nextLine();
             String[] s = input.split(" ");
 
-//            for (String st : s) {
-//                System.out.println(st);
-//            }
-
-//        String[] s
-//                = { "10", "6", "9",  "3", "+", "-11", "*",
-//                "/",  "*", "17", "+", "5", "+" };
-
             RPN_calculator str = new RPN_calculator();
             Double result = str.calculate(s);
             System.out.println(result);

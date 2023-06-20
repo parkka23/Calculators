@@ -22,8 +22,6 @@ public class RPN_calculator_interface implements ActionListener {
     double num1=0, num2=0;
     char operator;
 
-   String output="";
-
     Stack<String> stack = new Stack<String>();
 
     BigDecimal x;
@@ -141,16 +139,6 @@ public class RPN_calculator_interface implements ActionListener {
         }
 
         if (e.getSource() == addButton) {
-//            value= BigDecimal.valueOf(0);
-//            ArrayList<BigDecimal> nums=new ArrayList<>();
-//
-//            int i=0;
-//            do{
-//                nums.set(i, BigDecimal.valueOf(Double.parseDouble(stack.pop())));
-//                value.add(nums.get(i));
-//                i++;
-//            }while (!stack.isEmpty());
-//
             x = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
             y = BigDecimal.valueOf(Double.parseDouble(stack.pop()));
             value = x.add(y);
@@ -203,14 +191,12 @@ public class RPN_calculator_interface implements ActionListener {
             else {
                 functionButtons[5].setEnabled(false);
             }
-
-
         }
 
         if (e.getSource() == clrButton) {
             textField.setText("");
             stack.clear();
-//            input.clear();
+
         }
 
         if (e.getSource() == delButton) {
